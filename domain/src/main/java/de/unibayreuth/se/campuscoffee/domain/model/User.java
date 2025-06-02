@@ -10,10 +10,12 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.time.LocalDateTime;
 
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import java.time.ZoneId;
 
 import jakarta.annotation.Nullable;
 import jakarta.validation.constraints.*;
@@ -23,40 +25,24 @@ import jakarta.validation.constraints.*;
  */
 
 @Data
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
 public class User implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 1L;
 
-    @Nullable
-    private Long id;
+    private Long id; // null when the user has not been created yet
+    private LocalDateTime createdAt = LocalDateTime.now(ZoneId.of("UTC")); // set on user creation
+    private LocalDateTime updatedAt = createdAt; // set on user creation and update
 
-    @NotNull
-    @CreationTimestamp
-    private LocalDateTime createdAt;
-
-    @NotNull
-    @UpdateTimestamp
-    private LocalDateTime updatedAt;
-
-    @NotBlank
-    @Pattern(regexp = "\\w+", message = "Login name must contain only word characters.")
+    @NonNull
     private String loginName;
 
-    @NotBlank
-    @Email
-    @Column(name = "email_address")
-
+    @NonNull
     private String email;
 
-    @NotBlank
-    @Size(min = 1, max = 255)
+    @NonNull
     private String firstName;
 
-    @NotBlank
-    @Size(min = 1, max = 255)
+    @NonNull
     private String lastName;
 }
