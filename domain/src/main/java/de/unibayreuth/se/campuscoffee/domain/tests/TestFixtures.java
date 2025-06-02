@@ -20,16 +20,6 @@ public class TestFixtures {
             new Pos("Lidl (Nürnberger Str.)", "Description 1", PosType.VENDING_MACHINE, CampusType.ZAPF, "Nürnberger Str.", "3a", 95448, "Bayreuth")
     );
 
-    private static final List<User> USER_LIST = List.of(
-            new User("jsmith", "jsmith@example.com", "John", "Smith",
-                    LocalDateTime.now().minusDays(10), LocalDateTime.now().minusDays(1)),
-
-            new User("adoe", "adoe@example.com", "Alice", "Doe",
-                    LocalDateTime.now().minusDays(5), LocalDateTime.now().minusHours(10)),
-
-            new User("mbrown", "mbrown@example.com", "Michael", "Brown",
-                    LocalDateTime.now().minusDays(2), LocalDateTime.now())
-    );
 
 
     public static List<Pos> getPosList() {
@@ -38,11 +28,11 @@ public class TestFixtures {
                 .toList();
     }
 
-    public static List<User> getUserList() {
-        return USER_LIST.stream()
-                .map(SerializationUtils::clone)
-                .toList();
-    }
+//    public static List<User> getUserList() {
+//        return USER_LIST.stream()
+//                .map(SerializationUtils::clone)
+//                .toList();
+//    }
 
     public static List<Pos> createPos(PosService posService) {
         return getPosList().stream()
@@ -50,10 +40,10 @@ public class TestFixtures {
                 .collect(Collectors.toList());
     }
 
-    public static List<User> createUsers(UserService userService) {
-        return getUserList().stream()
-                .map(userService::upsert)
-                .collect(Collectors.toList());
-    }
+//    public static List<User> createUsers(UserService userService) {
+//        return getUserList().stream()
+//                .map(userService::upsert)
+//                .collect(Collectors.toList());
+//    }
 
 }
