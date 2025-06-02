@@ -7,6 +7,8 @@ import de.unibayreuth.se.campuscoffee.domain.model.User;
 import de.unibayreuth.se.campuscoffee.domain.ports.PosService;
 import de.unibayreuth.se.campuscoffee.domain.ports.UserService;
 import org.apache.commons.lang3.SerializationUtils;
+import java.time.LocalDateTime;
+import java.util.List;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,8 +20,34 @@ public class TestFixtures {
             new Pos("Lidl (Nürnberger Str.)", "Description 1", PosType.VENDING_MACHINE, CampusType.ZAPF, "Nürnberger Str.", "3a", 95448, "Bayreuth")
     );
 
-    // TODO: fill this list.
-    private static final List<User> USER_LIST = List.of();
+    private static final List<User> USER_LIST = List.of(
+            User.builder()
+                    .createdAt(LocalDateTime.now().minusDays(10))
+                    .updatedAt(LocalDateTime.now().minusDays(1))
+                    .loginName("jsmith")
+                    .email("jsmith@example.com")
+                    .firstName("John")
+                    .lastName("Smith")
+                    .build(),
+
+            User.builder()
+                    .createdAt(LocalDateTime.now().minusDays(5))
+                    .updatedAt(LocalDateTime.now().minusHours(10))
+                    .loginName("adoe")
+                    .email("adoe@example.com")
+                    .firstName("Alice")
+                    .lastName("Doe")
+                    .build(),
+
+            User.builder()
+                    .createdAt(LocalDateTime.now().minusDays(2))
+                    .updatedAt(LocalDateTime.now())
+                    .loginName("mbrown")
+                    .email("mbrown@example.com")
+                    .firstName("Michael")
+                    .lastName("Brown")
+                    .build()
+    );
 
     public static List<Pos> getPosList() {
         return POS_LIST.stream()
@@ -40,7 +68,9 @@ public class TestFixtures {
     }
 
     public static List<User> createUsers(UserService userService) {
-        // TODO: implement this method
-        return List.of();
+        return getUserList().stream()
+                .map(userService::upsert)
+                .collect(Collectors.toList());
     }
+
 }

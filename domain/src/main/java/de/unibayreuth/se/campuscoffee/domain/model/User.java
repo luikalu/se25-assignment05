@@ -1,5 +1,6 @@
 package de.unibayreuth.se.campuscoffee.domain.model;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.io.Serial;
@@ -47,6 +48,8 @@ public class User implements Serializable {
 
     @NotBlank
     @Email
+    @Column(name = "email_address")
+
     private String email;
 
     @NotBlank
