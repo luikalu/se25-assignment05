@@ -30,16 +30,13 @@ public class User implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    // ID can be null before persistence
     @Nullable
     private Long id;
 
-    // Must be set by JPA on creation
     @NotNull
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    // Must be set by JPA on creation or update
     @NotNull
     @UpdateTimestamp
     private LocalDateTime updatedAt;
