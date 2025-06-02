@@ -21,33 +21,16 @@ public class TestFixtures {
     );
 
     private static final List<User> USER_LIST = List.of(
-            User.builder()
-                    .createdAt(LocalDateTime.now().minusDays(10))
-                    .updatedAt(LocalDateTime.now().minusDays(1))
-                    .loginName("jsmith")
-                    .email("jsmith@example.com")
-                    .firstName("John")
-                    .lastName("Smith")
-                    .build(),
+            new User("jsmith", "jsmith@example.com", "John", "Smith",
+                    LocalDateTime.now().minusDays(10), LocalDateTime.now().minusDays(1)),
 
-            User.builder()
-                    .createdAt(LocalDateTime.now().minusDays(5))
-                    .updatedAt(LocalDateTime.now().minusHours(10))
-                    .loginName("adoe")
-                    .email("adoe@example.com")
-                    .firstName("Alice")
-                    .lastName("Doe")
-                    .build(),
+            new User("adoe", "adoe@example.com", "Alice", "Doe",
+                    LocalDateTime.now().minusDays(5), LocalDateTime.now().minusHours(10)),
 
-            User.builder()
-                    .createdAt(LocalDateTime.now().minusDays(2))
-                    .updatedAt(LocalDateTime.now())
-                    .loginName("mbrown")
-                    .email("mbrown@example.com")
-                    .firstName("Michael")
-                    .lastName("Brown")
-                    .build()
+            new User("mbrown", "mbrown@example.com", "Michael", "Brown",
+                    LocalDateTime.now().minusDays(2), LocalDateTime.now())
     );
+
 
     public static List<Pos> getPosList() {
         return POS_LIST.stream()
